@@ -3,36 +3,42 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HelloIonicPage } from './pages/hello-ionic/hello-ionic.page';
-import { ItemDetailsPage } from './pages/item-details/item-details.page';
-import { ListPage } from './pages/list/list.page';
+import { RootPage } from './pages/root/root.page';
+import { VibrationPage } from './pages/vibration/vibration.page';
+import { BarcodePage } from './pages/barcode/barcode.page';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Vibration } from '@ionic-native/vibration';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
     MyApp,
-    HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    RootPage,
+    VibrationPage,
+    BarcodePage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [
+    IonicApp
+  ],
   entryComponents: [
     // Every component that is used dynamically, not declaritively
     MyApp,
-    HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    RootPage,
+    VibrationPage,
+    BarcodePage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Vibration,
+    BarcodeScanner,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })
 export class AppModule {}

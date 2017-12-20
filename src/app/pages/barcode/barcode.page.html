@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Vibration</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <p>Basic native barcode capability.</p>
+  <p>
+    <button ion-button color="primary" (click)="scan()">Scan</button>
+  </p>
+  <ion-list>
+    <ion-item>
+      <h2>Text</h2>
+      <h3 [ngClass]="{'faded' : !text }">{{ text || placeholder }}</h3>
+    </ion-item>
+    <ion-item>
+      <h2>Format</h2>
+      <h3 [ngClass]="{'faded' : !text }">{{ format || placeholder }}</h3>
+    </ion-item>
+    <ion-item>
+      <h2>Cancelled</h2>
+      <h3 [ngClass]="{'faded' : !text }">{{ cancelled || placeholder }}</h3>
+    </ion-item>
+  </ion-list>
+</ion-content>

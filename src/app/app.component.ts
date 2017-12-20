@@ -5,8 +5,9 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HelloIonicPage } from './pages/hello-ionic/hello-ionic.page';
-import { ListPage } from './pages/list/list.page';
+import { RootPage } from './pages/root/root.page';
+import { VibrationPage } from './pages/vibration/vibration.page';
+import { BarcodePage } from './pages/barcode/barcode.page';
 
 import { Page } from './models/page/page'
 
@@ -17,7 +18,7 @@ import { Page } from './models/page/page'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HelloIonicPage;
+  rootPage: any = RootPage;
   pages: Page[];
 
   constructor(
@@ -29,19 +30,22 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage }
+      { title: 'Home', component: RootPage },
+      { title: 'Vibration', component: VibrationPage },
+      { title: 'Barcode', component: BarcodePage },
     ];
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      console.log('ready!');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   openPage(page: Page) {
+    console.log(`opening page ${page.title}`);
     this.menu.close();
     this.nav.setRoot(page.component);
   }
