@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { IonicPage } from 'ionic-angular';
-
 import { Vibration } from '@ionic-native/vibration';
 
 @IonicPage()

@@ -1,43 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { AppComponent } from './app.component';
 
-import { RootPage } from './pages/root/root.page';
-import { VibrationPage } from './pages/vibration/vibration.page';
-import { BarcodePage } from './pages/barcode/barcode.page';
+import { RootPageModule } from './pages/root/root.page.module';
+import { VibrationPageModule } from './pages/vibration/vibration.page.module';
+import { BarcodePageModule } from './pages/barcode/barcode.page.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Vibration } from '@ionic-native/vibration';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
-    MyApp,
-    RootPage,
-    VibrationPage,
-    BarcodePage,
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    RootPageModule,
+    VibrationPageModule,
+    BarcodePageModule,
+    IonicModule.forRoot(AppComponent),
   ],
   bootstrap: [
     IonicApp
   ],
   entryComponents: [
-    // Every component that is used dynamically, not declaritively
-    MyApp,
-    RootPage,
-    VibrationPage,
-    BarcodePage,
+    AppComponent,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Vibration,
-    BarcodeScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

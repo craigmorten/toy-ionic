@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "toy-ionic",
+  "short_name": "toy-ionic",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

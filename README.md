@@ -19,4 +19,14 @@ See the [Ionic Installation Guide](https://ionicframework.com/docs/intro/install
 
 To start the application in the browser with development tools run `ionic serve --lab`
 
-To start the application on an android device run `ionic cordova run android --device`. Note that you will have to have enabled developer settings for the device and enabled USB debugging, e.g. [http://www.syncios.com/android/how-to-debug-samsung-galaxy-j2-j3-j5-j7.html](http://www.syncios.com/android/how-to-debug-samsung-galaxy-j2-j3-j5-j7.html).
+To start the application on an android device connected by USB, run `ionic cordova run android --device`. Note that you will have to have enabled developer settings for the device and enabled USB debugging, e.g. [http://www.syncios.com/android/how-to-debug-samsung-galaxy-j2-j3-j5-j7.html](http://www.syncios.com/android/how-to-debug-samsung-galaxy-j2-j3-j5-j7.html).
+
+There is also the option to collect logs from the device and implement live reloading. First ensure both the phone and computer are connected to the same wifi network. Then run `ionic cordova run android --device -cl --debug`. Logs will be displayed in the ionic cli logs.
+
+Alternatively, you can also use applications such as 'Ionic view' to run and view applications on devices (such as for iOS).
+
+### Tests
+
+Units tests are run using Karma. You can run unit tests using `npm test`.
+
+End to end tests are run using Protractor. You can run e2e tests using `npm run e2e`.

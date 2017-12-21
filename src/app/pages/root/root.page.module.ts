@@ -9,5 +9,8 @@ import { RootPage } from './root.page';
   imports: [
     IonicPageModule.forChild(RootPage),
   ],
+  entryComponents: [
+    RootPage,
+  ],
 })
 export class RootPageModule {}

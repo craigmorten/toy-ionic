@@ -12,10 +12,10 @@ import { BarcodePage } from './pages/barcode/barcode.page';
 import { Page } from './models/page/page'
 
 @Component({
-  selector: 'app-root',
+  selector: 'app',
   templateUrl: 'app.component.html',
 })
-export class MyApp {
+export class AppComponent {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = RootPage;
@@ -38,14 +38,12 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      console.log('ready!');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   openPage(page: Page) {
-    console.log(`opening page ${page.title}`);
     this.menu.close();
     this.nav.setRoot(page.component);
   }
