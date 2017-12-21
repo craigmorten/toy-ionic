@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { RootPageModule } from './pages/root/root.page.module';
 import { VibrationPageModule } from './pages/vibration/vibration.page.module';
 import { BarcodePageModule } from './pages/barcode/barcode.page.module';
+import { MqttPageModule } from './pages/mqtt/mqtt.page.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RootPageModule,
     VibrationPageModule,
     BarcodePageModule,
+    MqttPageModule,
     IonicModule.forRoot(AppComponent),
   ],
   bootstrap: [

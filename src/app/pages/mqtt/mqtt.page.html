@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>MQTT</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h3>MQTT example</h3>
+  <ion-list>
+    <ion-item>
+      <div>
+        <div ion-button class="mqtt-connection" [ngClass]="{'connected': mqttClient?.connected, 'connecting': (!mqttClient?.connected && !mqttClient?.disconnected && !mqttClient?.disconnecting) || (!mqttClient?.disconnected && !mqttClient?.disconnected)}"></div>
+        {{ (mqttClient?.connected) ? 'Connected' : (mqttClient?.disconnected) ? 'Disconnected' : (mqttClient?.disconnecting) ? 'Disconnecting'
+        : 'Connecting'}}
+      </div>
+      <div>
+        <div ion-button class="mqtt-connection" [ngClass]="{'connected': subscribed}"></div> {{ (subscribed) ? 'Subscribed' : 'Unsubscribed'}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button full small ion-button color="primary" (click)="onConnect()" [disabled]="mqttClient?.connected">Connect</button>
+          </ion-col>
+          <ion-col col-6>
+            <button full small ion-button color="secondary" (click)="onDisconnect()" [disabled]="!mqttClient?.connected">Disconnect</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Current Topic Name</ion-label>
+      <ion-input type="text" [(ngModel)]="topic" [disabled]="subscribed"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button full small ion-button color="primary" (click)="onSubscribe()" [disabled]="!mqttClient?.connected || subscribed">Subscribe</button>
+          </ion-col>
+          <ion-col col-6>
+            <button full small ion-button color="secondary" (click)="onUnsubscribe()" [disabled]="!subscribed">Unsubscribe</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Message to publish</ion-label>
+      <ion-input type="text" placeholder="Type message here..." [(ngModel)]="message"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button color="primary" full (click)="onPublish()">Publish</button>
+
+  <br>
+  <h4 *ngIf="responses.length > 0">Message stream:</h4>
+  <ion-list>
+    <ion-item *ngFor="let response of responses; trackBy: responseId">
+      <ion-avatar item-start>
+        {{ response.id }}.
+      </ion-avatar>
+      <h3>Received {{ response.timestamp }}</h3>
+      <p>{{ response.payload }}</p>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

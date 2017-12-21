@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RootPage } from './pages/root/root.page';
 import { VibrationPage } from './pages/vibration/vibration.page';
 import { BarcodePage } from './pages/barcode/barcode.page';
+import { MqttPage } from './pages/mqtt/mqtt.page';
 
 import { Page } from './models/page/page'
 
@@ -17,9 +18,9 @@ import { Page } from './models/page/page'
 })
 export class AppComponent {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = RootPage;
+  
   pages: Page[];
+  rootPage: any = MqttPage;
 
   constructor(
     public platform: Platform,
@@ -33,6 +34,7 @@ export class AppComponent {
       { title: 'Home', component: RootPage },
       { title: 'Vibration', component: VibrationPage },
       { title: 'Barcode', component: BarcodePage },
+      { title: 'MQTT', component: MqttPage },
     ];
   }
 

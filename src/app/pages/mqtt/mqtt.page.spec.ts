@@ -4,20 +4,20 @@ import { IonicModule, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AppComponent } from './app.component';
-import { PlatformMock, StatusBarMock, SplashScreenMock } from '../../test/mocks-ionic';
+import { MqttPage } from './mqtt.page';
+import { PlatformMock, StatusBarMock, SplashScreenMock } from '../../../../test/mocks-ionic';
 
-describe('AppComponent', () => {
-    let fixture: ComponentFixture<AppComponent>;
-    let component: AppComponent;
+describe('RootPage', () => {
+    let fixture: ComponentFixture<MqttPage>;
+    let component: MqttPage;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AppComponent,
+                MqttPage,
             ],
             imports: [
-                IonicModule.forRoot(AppComponent),
+                IonicModule.forRoot(MqttPage),
             ],
             providers: [
                 { provide: StatusBar, useClass: StatusBarMock },
@@ -28,16 +28,12 @@ describe('AppComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AppComponent);
+        fixture = TestBed.createComponent(MqttPage);
         component = fixture.componentInstance;
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
-        expect(component instanceof AppComponent).toBe(true);
-    });
-
-    it('should have four pages', () => {
-        expect(component.pages.length).toBe(4);
+        expect(component instanceof MqttPage).toBe(true);
     });
 });
