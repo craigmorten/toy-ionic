@@ -20,7 +20,7 @@ export class AppComponent {
   @ViewChild(Nav) nav: Nav;
   
   pages: Page[];
-  rootPage: any = MqttPage;
+  rootPage: any = RootPage;
 
   constructor(
     public platform: Platform,

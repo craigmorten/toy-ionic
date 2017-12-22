@@ -10,46 +10,33 @@ import * as fromMqtt from 'mqtt';
 export class MqttPage {
   // TODO: different ports for different protocols...?
   port = '8080';
-  url = `mqtt://test.mosquitto.org:${this.port}`;
+  url = 'mqtt://test.mosquitto.org';
   mqttClient: fromMqtt.MqttClient;
   topic = `toy-ionic:${(Math.random() * Math.pow(10, 8)) | 0}`;
   message: string = '';
-  responses: {id: number, payload: string, timestamp: string}[] = [];
+  responses: { id: number, payload: string, timestamp: string }[] = [];
   subscribed = false;
 
   constructor(private toastCtrl: ToastController) { }
 
   ionViewWillEnter() {
-    this.mqttClient = fromMqtt.connect(this.url);
-
-    this.mqttClient
-      .on('connect', () => {
-        // connected
-      })
-      .on('reconnect', () => {
-        // reconnected
-      })
-      .on('message', (topic: string, payload: Buffer, packet: fromMqtt.Packet) => {
-        const now = new Date().toUTCString();
-        this.responses.push({
-          id: this.responses.length + 1,
-          payload: payload.toString(),
-          timestamp: now,
-        });
-      })
-      .on('error', (error: Error) => {
-        this.errorToast(`Error: ${error.message}`);
-      })
-      .on('offline', () => {
-        // offline
-      })
-      .on('close', () => {
-        // closed
-      });
+    this.onConnect();
   }
 
   ionViewWillLeave() {
     this.onDisconnect();
+  }
+
+  toast(message: string) {
+    if (!message) {
+      this.toastCtrl
+        .create({
+          message: message,
+          duration: 2000,
+          position: 'top'
+        })
+        .present();
+    }
   }
 
   errorToast(message: string = 'An unexpected error occurred.') {
@@ -91,11 +78,33 @@ export class MqttPage {
   }
 
   onConnect() {
-    if (!this.mqttClient) {
-      this.mqttClient = fromMqtt.connect(this.url);
-    } else if (this.mqttClient.disconnected) {
-      this.mqttClient.reconnect();
-    }
+    this.onDisconnect();
+    this.mqttClient = fromMqtt.connect(`${this.url}:${this.port}`);
+
+    this.mqttClient
+      .on('connect', () => {
+        // connected
+      })
+      .on('reconnect', () => {
+        this.toast(`MQTT Connection Reconnecting`);
+      })
+      .on('message', (topic: string, payload: Buffer, packet: fromMqtt.Packet) => {
+        const now = new Date().toUTCString();
+        this.responses.push({
+          id: this.responses.length + 1,
+          payload: payload.toString(),
+          timestamp: now,
+        });
+      })
+      .on('error', (error: Error) => {
+        this.errorToast(`Error: ${error.message}`);
+      })
+      .on('offline', () => {
+        this.toast(`MQTT Connection Offline`);
+      })
+      .on('close', () => {
+        this.toast(`MQTT Connection Closed`);
+      });
   }
 
   onDisconnect() {
@@ -108,7 +117,7 @@ export class MqttPage {
     }
   }
 
-  responseId(index: number, item: {id: number, payload: string}) {
+  responseId(index: number, item: { id: number, payload: string }) {
     return item.id;
   }
 
